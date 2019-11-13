@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 })
 
-server.listen(3333, (err) => {
+server.listen(process.env.PORT || 3000, (err) => {
     if (err) {
         console.log(`Error starting server: ${err}`)
         process.exit(1)
