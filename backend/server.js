@@ -13,9 +13,9 @@ const websocket = socketio(server);
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const customAuthMiddleware = require("../middelware/custom-auth-middleware");
-const userController = require("../controllers/user-controller");
-const viewsController = require("../controllers/views-controller");
+const customAuthMiddleware = require("./middelware/custom-auth-middleware");
+const userController = require("./controllers/user-controller");
+const viewsController = require("./controllers/views-controller");
 var fs = require('fs');
 // directory references
 const clientDir = path.join(__dirname, "../client");
@@ -23,7 +23,7 @@ const clientDir = path.join(__dirname, "../client");
 const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
-const db = require("../models/index");
+const db = require("./models/index");
 
 app.use(cors())
 
