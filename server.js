@@ -21,8 +21,7 @@ var fs = require('fs');
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = process.env.PORT || 8080;
-
+const PORT = process.env.PORT || 3000;
 // Requiring our models for syncing
 const db = require("./models");
 
@@ -32,7 +31,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 })
 
-server.listen(process.env.PORT || 3000, (err) => {
+server.listen(PORT, (err) => {
     if (err) {
         console.log(`Error starting server: ${err}`)
         process.exit(1)
