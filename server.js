@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 8080;
 // Requiring our models for syncing
 const db = require("./models");
 
-app.use(cors())
+app.use(cors());
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
