@@ -9,6 +9,7 @@ const mDB = mongojs(process.env.MONGO_URI || 'mongodb://localhost:27017/chats');
 const app = express();
 const server = http.Server(app);
 const websocket = socketio(server);
+const config  = require("./config")
 (require('dotenv').config({ silent: process.env.NODE_ENV === 'production' }))
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -23,7 +24,7 @@ const clientDir = path.join(__dirname, "../client");
 const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
-const db = require("./models/index");
+const db = require("./backend/models/index");
 
 app.use(cors())
 
