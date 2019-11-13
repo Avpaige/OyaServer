@@ -39,6 +39,7 @@ server.listen(3333, (err) => {
     console.log('listening on *:3000')
 });
 
+
 // Mapping objects to easily map sockets and users.
 var clients = {};
 var users = {};
