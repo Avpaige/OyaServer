@@ -15,7 +15,8 @@
 		"dialect": "mysql",
 		"operatorsAliases": false
 	},
-	"production": {
+	"production": {		
+		"use_env_variable": "JAWSDB_URL",
 		"username": "root",
 		"password": null,
 		"database": "custom_auth_tutorial",
