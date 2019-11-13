@@ -12,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
 
 	// set up the associations so we can make queries that include
 	// the related objects
-	AuthToken.associate = function({ User }) {
-		AuthToken.belongsTo(User);
-	};
+	//CHANEL I COMMENTED THIS OUT TO SEE IF COULD FIND THE ERROR -AVP
+	// AuthToken.associate = function({ User }) {
+	// 	AuthToken.belongsTo(User);
+	// };
 
 	// generates a random 15 character token and
 	// associates it with a user

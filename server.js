@@ -21,9 +21,9 @@ var fs = require('fs');
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 // Requiring our models for syncing
-// const db = require("./models");
+const db = require("./models");
 
 app.use(cors());
 
@@ -133,10 +133,6 @@ stdin.addListener('data', function(d) {
 
 //START OF CHANEL'S CODE (minus dependencies which were moved to the top)
 //--------------------------------------------------------
-
-
-// controller imports
-
 
 // Express middleware that allows POSTing data
 app.use(bodyParser.urlencoded({ extended: true }));
