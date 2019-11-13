@@ -9,7 +9,7 @@ const mDB = mongojs(process.env.MONGO_URI || 'mongodb://localhost:27017/chats');
 const app = express();
 const server = http.Server(app);
 const websocket = socketio(server);
-require("dotenv").config();
+(require('dotenv').config({ silent: process.env.NODE_ENV === 'production' }))
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
