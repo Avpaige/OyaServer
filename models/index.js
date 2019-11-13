@@ -40,9 +40,3 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-module.exports = {
-  Volunteer: require("./Volunteer"),
-  User: require("./User"),
-  Jobs: require("./Jobs")
-};
-
