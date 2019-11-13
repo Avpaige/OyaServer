@@ -1,3 +1,4 @@
+//ALL DEPENDENCIES
 const express = require('express');
 const http = require('http')
 const socketio = require('socket.io');
@@ -29,7 +30,7 @@ app.use(cors());
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-});
+})
 
 server.listen(3333, (err) => {
     if (err) {
