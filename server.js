@@ -23,7 +23,7 @@ const clientDir = path.join(__dirname, "../client");
 // set up the Express App
 const PORT = process.env.PORT || 3000;
 // Requiring our models for syncing
-const db = require("./models");
+// const db = require("./models");
 
 app.use(cors());
 
