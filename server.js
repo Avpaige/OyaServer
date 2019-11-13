@@ -58,7 +58,7 @@ websocket.on('connection', (socket) => {
     socket.on("my other event", (data) => {
         console.log("Received event data");
         console.log(data);
-    })
+    });
         
 });
 
