@@ -1,48 +1,52 @@
 const mongoose = require('mongoose');
- 
+
 const Schema = mongoose.Schema;
- 
+
 const VolunteerSchema = new Schema({
   mysqlID: {
-    type: String, 
+    type: Number,
     required: true,
     unique: true
   },
-  languages: [
-    {language: french, 
-    type: Boolean,
-    required: true,
-    Default: false
-  },
-  {language: spanish, 
-      type: Boolean,
-    required: true,
-    Default: false
-  },
-  {language: english, 
-    type: Boolean,
-    required: true,
-    Default: false
- },
- {language: chinese, 
-    type: Boolean,
-    required: true,
-   Default: false
-  }],
-  avail: {
+  language1: {
+    language1: " ",
     type: String,
     required: true,
-   Default: inactive
-  }
-,
-  verified: {
-  required: true,
+    Default: false
+  },
+  language2: {
+    language2: " ",
+    type: String,
+    required: true,
+    Default: false
+  },
+  proficiency1: {
+    proficiency1: " ",
+    type: String,
+    required: true,
+    Default: false
+  },
+  proficiency2: {
+    proficiency2: " ",
+    type: String,
+    required: true,
+    Default: false
+  },
+  proficiency3: {
+    proficiency3: " ",
+    type: String,
+    required: true,
+    Default: false
+  },
+  avail: {
+    type: Boolean,
+    required: true,
     Default: false
   }
 })
- 
+
 const Volunteer = mongoose.model('Volunteer', VolunteerSchema);
- 
+
 module.exports = Volunteer;
- 
+
 
