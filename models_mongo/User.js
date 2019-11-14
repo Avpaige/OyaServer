@@ -3,40 +3,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
  
 const UserSchema = new Schema({
-  username: {
+  native: {
     type: String,
     required: true,
     unique: true
   },
-  hash: {
+  language: {
     type: String,
     required: true
-  },
-  languages: [
-    {language: french, 
-    type: Boolean,
-    required: true,
-    Default: false
-  },
-  {language: spanish, 
-      type: Boolean,
-    required: true,
-    Default: false
-  },
-  {language: english, 
-    type: Boolean,
-    required: true,
-    Default: false
- },
- {language: chinese, 
-    type: Boolean,
-    required: true,
-   Default: false
-  }],
-  avail: {
+  }, 
+  room: {
     type: String,
     required: true,
-   Default: inactive
+   Default: null
   }
 })
  
