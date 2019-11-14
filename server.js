@@ -28,7 +28,7 @@ const db = require("./models");
 app.use(cors());
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');
 })
 
 
@@ -45,11 +45,11 @@ app.get('/', function (req, res) {
 
 
 server.listen(PORT, (err) => {
-    if (err) {
-        console.log(`Error starting server: ${err}`)
-        process.exit(1)
-    }
-    console.log('listening on *:3000')
+  if (err) {
+    console.log(`Error starting server: ${err}`)
+    process.exit(1)
+  }
+  console.log('listening on *:3000')
 });
 
 
@@ -62,17 +62,77 @@ var users = {};
 var chatId = 1;
 
 websocket.on('connection', (socket) => {
-    console.log("here")
-    clients[socket.id] = socket;
-    socket.on('userJoined', (userId) => onUserJoined(userId, socket));
-    socket.on('message', (message) => onMessageReceived(message, socket));
+  console.log("here")
+  clients[
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 1,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 2,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 3,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 4,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 5,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 6,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 7,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 8,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 9,
+    },
+    {
+      socketID: socket.id,
+      volunteerID: id,
+      occupancy: 1,
+      roomNum: 10,
+    }] = socket;
+  socket.on('userJoined', (userId) => onUserJoined(userId, socket));
+  socket.on('message', (message) => onMessageReceived(message, socket));
 
-    socket.emit('news', { coding: "is fun"});
-    socket.on("my other event", (data) => {
-        console.log("Received event data");
-        console.log(data);
-    });
-        
+  socket.emit('news', { coding: "You are in the chatroom, please wait to be connected with your user." });
+  socket.on("my other event", (data) => {
+    console.log("Received event data");
+    console.log(data);
+  });
+
 });
 
 
@@ -91,7 +151,7 @@ function onUserJoined(userId, socket) {
       users[socket.id] = userId;
       _sendExistingMessages(socket);
     }
-  } catch(err) {
+  } catch (err) {
     console.err(err);
   }
 }
@@ -115,7 +175,7 @@ function _sendExistingMessages(socket) {
       // If there aren't any messages, then return.
       if (!messages.length) return;
       socket.emit('message', messages.reverse());
-  });
+    });
 }
 
 // Save the message to the db and send all sockets but the sender.
@@ -136,7 +196,7 @@ function _sendAndSaveMessage(message, socket, fromServer) {
 
 // Allow the server to participate in the chatroom through stdin.
 var stdin = process.openStdin();
-stdin.addListener('data', function(d) {
+stdin.addListener('data', function (d) {
   _sendAndSaveMessage({
     text: d.toString().trim(),
     createdAt: new Date(),
