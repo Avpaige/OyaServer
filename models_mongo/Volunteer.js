@@ -48,7 +48,7 @@ const VolunteerSchema = new Schema({
     required: true,
     Default: false
   },
-  socket: {
+  room: {
     type: Boolean,
     required: true,
     Default: false

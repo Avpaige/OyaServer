@@ -63,8 +63,7 @@ module.exports = {
 
     // (GET) getting socket number for VOLUNTEER
 
-    // (PUT) updating job availibility of volunteer (opens a new socket)
-
+    // (PUT) updating message job availibility of volunteer (opens a new socket)
     appAvailUpdate: function (req, res) {
         // update avail and if true set socket
         const mysqlID = req.body.mysqlID
@@ -86,16 +85,15 @@ module.exports = {
             });
     },
 
-    // (POST) updating chat availibility of volunteer (prevents other users to connect with them)
-
+    // (PUT) updating chat availibility of volunteer (prevents other users to connect with them)
     chatAvailUpdate: function (req, res) {
         // if socket is full there is a put call that (triggered by the user) to make chat avail false
-        const socket = req.body.socket
+        const room = req.body.room
         const currentAvail = req.body.currentAvail
 
         db.Volunteer
             .findOneAndUpdate({
-                socket: socket
+                room: room
             }, {
                 chatavail: currentAvail
             })
