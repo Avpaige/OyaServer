@@ -18,6 +18,8 @@ const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
 const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
+const mysql = require("mysql");
+
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
