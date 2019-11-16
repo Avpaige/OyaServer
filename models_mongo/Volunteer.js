@@ -47,6 +47,11 @@ const VolunteerSchema = new Schema({
     type: Boolean,
     required: true,
     Default: false
+  },
+  socket: {
+    type: Boolean,
+    required: true,
+    Default: false
   }
 })
 

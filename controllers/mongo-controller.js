@@ -65,13 +65,17 @@ module.exports = {
 
     // (PUT) updating job availibility of volunteer (opens a new socket)
 
-    matchUser: function (req, res) {
+    appAvailUpdate: function (req, res) {
         // update avail and if true set socket
         const mysqlID = req.body.mysqlID
+        const appAvail = req.body.massageAvail
 
         db.Volunteer
             .findOneAndUpdate({
                 mysqlID: mysqlID
+            }, {
+                appavail: appAvail,
+                chatavail: appAvail,
             })
             .then(volunteers => {
                 volunteermatch = volunteers[0]
@@ -83,5 +87,25 @@ module.exports = {
     },
 
     // (POST) updating chat availibility of volunteer (prevents other users to connect with them)
+
+    chatAvailUpdate: function (req, res) {
+        // if socket is full there is a put call that (triggered by the user) to make chat avail false
+        const socket = req.body.socket
+        const currentAvail = req.body.currentAvail
+
+        db.Volunteer
+            .findOneAndUpdate({
+                socket: socket
+            }, {
+                chatavail: currentAvail
+            })
+            .then(volunteers => {
+                volunteermatch = volunteers[0]
+            })
+            .catch(err => {
+                res.status(422)
+                console.log("create volunteer", err)
+            });
+    },
 
 };
