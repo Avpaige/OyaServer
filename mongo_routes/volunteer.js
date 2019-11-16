@@ -2,21 +2,26 @@ const express = require('express');
 const router = express.Router();
 const volunteerController = require("../controllers/mongo-controller");
 
-// Matches with "/volunteer"
+// Matches with "/volunteer" ( post in form, put in account)
 router.route("/")
-    .get(volunteerController.saveVolunteer)
-    .post(volunteerController.getVolunteer)
-
-// Matches with "/volunteer/room"
+    .post(volunteerController.saveVolunteer) // FE: form
+    .put(volunteerController.appAvailUpdate) // FE: account
+    
+// Matches with "/volunteer/room" (in v-message)
 router.route("/room")
     .get(volunteerController.volunteerRoom)
 
-// Matches with "/volunteer/:mysqlID"
-router
+// Matches with "/volunteer/:mysqlID" (in login)
+router 
     .route("/:mysqlID")
-    .put(volunteerController.appAvailUpdate)
-    
-// Matches with "/volunteer/avail/chat"
+    .get(volunteerController.getVolunteer) // FE: login
+   
+ // Matches with "/volunteer/notification/:mysqlID" (in login)
+router 
+.route("notification/:mysqlID")
+.get(volunteerController.getMessageVolunteer) // FE: account
+
+// Matches with "/volunteer/avail/chat" (in account)
 router
     .route("/avail/chat")
     .put(volunteerController.chatAvailUpdate)

@@ -55,7 +55,7 @@ module.exports = {
 
 
 
-                
+
                 appavail: true,
                 chatavail: true
             })
@@ -137,5 +137,17 @@ module.exports = {
         //     });
     },
 
+    // (GET) - VOLUNTEER - get call to trigger Front end(FE) notification
+    getMessageVolunteer: function (req, res) {
+        // mysqlID will be the /:mysqlID
+        const id = req.params.mysqlID
+        db.Volunteer
+            .find({ mysqlID: id })
+            .then(dbVolunteer => res.json(dbVolunteer))
+            .catch(err => {
+                res.status(422)
+                console.log("get message volunteer", err)
+            });
+    },
 
 };
