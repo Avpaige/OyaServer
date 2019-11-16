@@ -50,11 +50,16 @@ module.exports = {
                     { "language2": { "$in": [languageNeeded] } },
                     { "language3": { "$in": [languageNeeded] } },
                 ],
+                $or: [
+                    { "language1": { "$in": [native] } },
+                    { "language2": { "$in": [native] } },
+                    { "language3": { "$in": [native] } },
+                ],
                 appavail: true,
                 chatavail: true
             })
             .then(volunteers => {
-                if(res.length>0){
+                if (volunteers.length > 1 ){
                     volunteermatch = volunteers[0]
                 }        
                 return
