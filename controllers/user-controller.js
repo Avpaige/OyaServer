@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const mysql = require("mysql");
-const app = express();
+// const app = express();
 
 const router = express.Router();
 
