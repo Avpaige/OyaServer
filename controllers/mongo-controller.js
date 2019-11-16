@@ -43,24 +43,21 @@ module.exports = {
     matchUser: function (req, res) {
         const native = req.body.native
         const languageNeeded = req.body.language
-
         db.Volunteer
-            .find({
-                // in the find - this will need to search language1, language2, and language 3 for both native and languageNeeded
-                // INSERTCODE HERE
-
-
-
-
-
-
-
-
+            .find({ 
+                $or: [
+                    { "language1": { "$in": [languageNeeded] } },
+                    { "language2": { "$in": [languageNeeded] } },
+                    { "language3": { "$in": [languageNeeded] } },
+                ],
                 appavail: true,
                 chatavail: true
             })
             .then(volunteers => {
-                volunteermatch = volunteers[0]
+                if(res.length>0){
+                    volunteermatch = volunteers[0]
+                }        
+                return
             })
             .catch(err => {
                 res.status(422)
@@ -70,7 +67,7 @@ module.exports = {
 
     // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
     volunteerRoom: function (req, res) {
-        
+            
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
@@ -83,7 +80,7 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
-                 // We want to update that if they toggle the messages on set everything on or off
+                // We want to update that if they toggle the messages on set everything on or off
                 appavail: appAvail,
                 chatavail: appAvail,
             })
@@ -115,23 +112,25 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
-     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
-     finishChat: function (req, res) {
-         // TAKE THE USER OUT OF THE CHAT (LAST PERSON IN THE CHAT)
-        const room = req.body.room
 
-        db.Volunteer
-            .findOneAndUpdate({
-                room: room
-            }, {
-                chatavail: true
-            })
-            .then(volunteers => {
-            })
-            .catch(err => {
-                res.status(422)
-                console.log("create volunteer", err)
-            });
+     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
+    finishChat: function (req, res) {
+        // const room = req.body.room
+        // const currentAvail = req.body.currentAvail
+
+        // db.Volunteer
+        //     .findOneAndUpdate({
+        //         room: room
+        //     }, {
+        //         chatavail: currentAvail
+        //     })
+        //     .then(volunteers => {
+        //         volunteermatch = volunteers[0]
+        //     })
+        //     .catch(err => {
+        //         res.status(422)
+        //         console.log("create volunteer", err)
+        //     });
     },
 
     // (GET) - VOLUNTEER - get call to trigger Front end(FE) notification
