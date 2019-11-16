@@ -97,13 +97,12 @@ module.exports = {
     chatAvailUpdate: function (req, res) {
         // if socket is full there is a put call that (triggered by the user) to make chat avail false
         const room = req.body.room
-        const currentAvail = req.body.currentAvail
 
         db.Volunteer
             .findOneAndUpdate({
                 room: room
             }, {
-                chatavail: currentAvail
+                chatavail: false
             })
             .then(volunteers => {
                 volunteermatch = volunteers[0]
@@ -113,8 +112,8 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
-    // (PUT) that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
 
+     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
     finishChat: function (req, res) {
         // const room = req.body.room
         // const currentAvail = req.body.currentAvail
@@ -134,5 +133,17 @@ module.exports = {
         //     });
     },
 
+    // (GET) - VOLUNTEER - get call to trigger Front end(FE) notification
+    getMessageVolunteer: function (req, res) {
+        // mysqlID will be the /:mysqlID
+        const id = req.params.mysqlID
+        db.Volunteer
+            .find({ mysqlID: id })
+            .then(dbVolunteer => res.json(dbVolunteer))
+            .catch(err => {
+                res.status(422)
+                console.log("get message volunteer", err)
+            });
+    },
 
 };
