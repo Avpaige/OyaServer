@@ -5,7 +5,7 @@ const db = require("../models_mongo");
 
 module.exports = {
 
-    // (POST) saving VOLUNTEER INFORMATION
+    // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
             mysqlID = req.body.mysqlID,
@@ -26,7 +26,7 @@ module.exports = {
             });
     },
 
-    // (GET) getting VOLUNTEER INFORMATION // the id will be passed VIA URL
+    // (GET) - VOLUNTEER - getting VOLUNTEER INFORMATION // the id will be passed VIA URL
     getVolunteer: function (req, res) {
         // mysqlID will be the /:mysqlID
         const id = req.params.mysqlID
@@ -39,9 +39,8 @@ module.exports = {
             });
     },
 
-    // (GET) getting USER native and needed language and logic to MATCH USER
+    // (POST) - USER - getting USER native and needed language and logic to MATCH USER
     matchUser: function (req, res) {
-        // mysqlID will be the /:mysqlID
         const native = req.body.native
         const languageNeeded = req.body.language
 
@@ -49,6 +48,14 @@ module.exports = {
             .find({
                 // in the find - this will need to search language1, language2, and language 3 for both native and languageNeeded
                 // INSERTCODE HERE
+
+
+
+
+
+
+
+                
                 appavail: true,
                 chatavail: true
             })
@@ -61,9 +68,12 @@ module.exports = {
             });
     },
 
-    // (GET) getting socket number for VOLUNTEER
+    // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
+    volunteerRoom: function (req, res) {
+        
+    },
 
-    // (PUT) updating message job availibility of volunteer (opens a new socket)
+    // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
     appAvailUpdate: function (req, res) {
         // update avail and if true set socket
         const mysqlID = req.body.mysqlID
@@ -73,6 +83,7 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
+                 // We want to update that if they toggle the messages on set everything on or off
                 appavail: appAvail,
                 chatavail: appAvail,
             })
@@ -85,7 +96,7 @@ module.exports = {
             });
     },
 
-    // (PUT) updating chat availibility of volunteer (prevents other users to connect with them)
+    // (PUT) - VOLUNTEER -  updating chat availibility of volunteer (prevents other users to connect with them) - seeing if they are with someone
     chatAvailUpdate: function (req, res) {
         // if socket is full there is a put call that (triggered by the user) to make chat avail false
         const room = req.body.room
@@ -105,5 +116,26 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
+     // (PUT) that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
+
+     finishChat: function (req, res) {
+        // const room = req.body.room
+        // const currentAvail = req.body.currentAvail
+
+        // db.Volunteer
+        //     .findOneAndUpdate({
+        //         room: room
+        //     }, {
+        //         chatavail: currentAvail
+        //     })
+        //     .then(volunteers => {
+        //         volunteermatch = volunteers[0]
+        //     })
+        //     .catch(err => {
+        //         res.status(422)
+        //         console.log("create volunteer", err)
+        //     });
+    },
+
 
 };
