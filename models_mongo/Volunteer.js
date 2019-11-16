@@ -52,6 +52,12 @@ const VolunteerSchema = new Schema({
     type: Boolean,
     required: true,
     Default: false
+  },
+  roomNum: {
+    type: Number,
+    required: true,
+    unique: true,
+    Default: null
   }
 })
 
