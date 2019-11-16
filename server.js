@@ -222,5 +222,3 @@ app.use("/assets", express.static(clientDir));
 
 // hook up our controllers
 app.use(userController);
-app.use(viewsController);
-
