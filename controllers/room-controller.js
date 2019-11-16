@@ -19,6 +19,18 @@ class OyaRooms {
         });
     }
 
+    leaveRoom(){
+    io.on('connection', function(socket){
+        socket.leave(roomNum);
+      });
+    }
+
+    joinRoom(){
+        io.on('connection', function(socket){
+            socket.join(roomNum);
+          });
+        }
+
     assignChatRoomsSockets() {
         return new Promise((resolve, reject) => {
             this.assignChatRoomNames().then(() => {
