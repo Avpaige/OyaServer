@@ -48,6 +48,14 @@ module.exports = {
             .find({
                 // in the find - this will need to search language1, language2, and language 3 for both native and languageNeeded
                 // INSERTCODE HERE
+
+
+
+
+
+
+
+                
                 appavail: true,
                 chatavail: true
             })
