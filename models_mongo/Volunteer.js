@@ -38,7 +38,12 @@ const VolunteerSchema = new Schema({
     required: true,
     Default: false
   },
-  avail: {
+  appavail: {
+    type: Boolean,
+    required: true,
+    Default: false
+  },
+  chatavail: {
     type: Boolean,
     required: true,
     Default: false
