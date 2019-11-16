@@ -75,6 +75,7 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
+                 // We want to update that if they toggle the messages on set everything on or off
                 appavail: appAvail,
                 chatavail: appAvail,
             })
@@ -107,5 +108,26 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
+     // (PUT) that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
+
+     finishChat: function (req, res) {
+        // const room = req.body.room
+        // const currentAvail = req.body.currentAvail
+
+        // db.Volunteer
+        //     .findOneAndUpdate({
+        //         room: room
+        //     }, {
+        //         chatavail: currentAvail
+        //     })
+        //     .then(volunteers => {
+        //         volunteermatch = volunteers[0]
+        //     })
+        //     .catch(err => {
+        //         res.status(422)
+        //         console.log("create volunteer", err)
+        //     });
+    },
+
 
 };
