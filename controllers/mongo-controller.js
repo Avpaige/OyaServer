@@ -60,19 +60,17 @@ module.exports = {
             })
             .then(volunteers => {
                 if (volunteers.length > 1 ){
-                    volunteermatch = volunteers[0]
+                    let volunteermatch = volunteers[0]
+                    // sending volunteer room/socket number
+                    // res.send(volunteermatch)
+                    console.log(volunteermatch)
                 }        
-                return
+                
             })
             .catch(err => {
                 res.status(422)
                 console.log("create volunteer", err)
             });
-    },
-
-    // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
-    volunteerRoom: function (req, res) {
-            
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
