@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const mysql = require("mysql");
+// const mysql = require("mysql");
 // const app = express();
 
 const router = express.Router();
@@ -10,18 +10,18 @@ const router = express.Router();
 // syntax below is called destructuring, its an es6 feature
 const User = require("../models");
 
-const connection = mysql.createConnection({
-	host: "us-cdbr-iron-east-05.cleardb.net",
-	user: "b60814e88265c9",
-	password: "961d279b",
-	database: "heroku_af0100799ed6eb1"
-});
+// const connection = mysql.createConnection({
+// 	host: "us-cdbr-iron-east-05.cleardb.net",
+// 	user: "b60814e88265c9",
+// 	password: "961d279b",
+// 	database: "heroku_af0100799ed6eb1"
+// });
 
-connection.connect(err => {
-	if (err) {
-		return err;
-	}
-});
+// connection.connect(err => {
+// 	if (err) {
+// 		return err;
+// 	}
+// });
 
 /* Register Route
 ========================================================= */
@@ -77,22 +77,20 @@ router.post("/login", async (req, res) => {
 ========================================================= */
 router.post("/form", async (req, res) => {
 	// SAVE SQL INFORMATION (FIRST NAME, LAST NAME, EMAIL, PHONE NUMBER)
-	connection.query(
-		"INSERT INTO userinfo SET ?",
-		{
-			firstname: req.body.firstname,
-			lastname: req.body.lastname,
-			email: req.body.email,
-			phonenumber: req.body.phonenumber
-		},
-		function(error, results) {
-			// If some error occurs, we throw an error.
-			if (error) throw error;
-
-			// Getting the 'response' from the database and sending it to our route. This is were the data is.
-			res.send(results);
-		}
-	);
+	// connection.query(
+	// 	"INSERT INTO userinfo SET ?",
+	// 	{
+	// 		firstname: req.body.firstname,
+	// 		lastname: req.body.lastname,
+	// 		email: req.body.email,
+	// 		phonenumber: req.body.phonenumber
+	// 	},
+	// function (error, results) {
+	// 	// If some error occurs, we throw an error.
+	// 	if (error) throw error;
+	// 	// Getting the 'response' from the database and sending it to our route. This is were the data is.
+	// 	res.send(results);
+	// }
 });
 
 // /* Logout Route
