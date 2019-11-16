@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
 router.post("/form", async (req, res) => {
 	// SAVE SQL INFORMATION (FIRST NAME, LAST NAME, EMAIL, PHONE NUMBER)
 	connection.query(
-		"INSERT INTO userInfo SET ?",
+		"INSERT INTO userinfo SET ?",
 		{
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
