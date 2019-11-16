@@ -41,14 +41,13 @@ module.exports = {
 
     // (GET) getting USER native and needed language and logic to MATCH USER
     matchUser: function (req, res) {
-        // mysqlID will be the /:mysqlID
         const native = req.body.native
         const languageNeeded = req.body.language
 
         db.Volunteer
             .find({
                 // in the find - this will need to search language1, language2, and language 3 for both native and languageNeeded
-                // INSERTCODE HERE
+                // INSERT CODE HERE
                 appavail: true,
                 chatavail: true
             })
@@ -73,6 +72,7 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
+             // We want to update that if they toggle the messages on set everything on or off
                 appavail: appAvail,
                 chatavail: appAvail,
             })
@@ -105,5 +105,7 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
+
+    // (PUT) that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
 
 };
