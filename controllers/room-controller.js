@@ -8,7 +8,7 @@ class OyaRooms {
         this.rooms=rooms;
     }
 
-    assignChatRoomNames() {
+    assignChatRoomNames(req, res) {
         return new Promise((resolve, reject) => {
             this.rooms().then((rooms) => {
                 this.chatRooms = rooms;
@@ -19,7 +19,7 @@ class OyaRooms {
         });
     }
 
-    assignChatRoomsSockets() {
+    assignChatRoomsSockets(req, res) {
         return new Promise((resolve, reject) => {
             this.assignChatRoomNames().then(() => {
                 this.namespace.on("connection", (socket) => {

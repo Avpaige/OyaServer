@@ -8,7 +8,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-            // mysqlID = req.body.mysqlID,
+            mysqlID = req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -35,7 +35,7 @@ module.exports = {
             .then(dbVolunteer => res.json(dbVolunteer))
             .catch(err => {
                 res.status(422)
-                console.log("create volunteer", err)
+                console.log("get volunteer", err)
             });
     },
 
@@ -69,7 +69,7 @@ module.exports = {
             })
             .catch(err => {
                 res.status(422)
-                console.log("create volunteer", err)
+                console.log("match user", err)
             });
     },
 
@@ -92,7 +92,7 @@ module.exports = {
             })
             .catch(err => {
                 res.status(422)
-                console.log("create volunteer", err)
+                console.log("volunteer app update", err)
             });
     },
 
@@ -112,7 +112,7 @@ module.exports = {
             })
             .catch(err => {
                 res.status(422)
-                console.log("create volunteer", err)
+                console.log("volunteer chat avail", err)
             });
     },
 
@@ -145,7 +145,7 @@ module.exports = {
             .then(dbVolunteer => res.json(dbVolunteer))
             .catch(err => {
                 res.status(422)
-                console.log("get message volunteer", err)
+                console.log("volunteer notification", err)
             });
     },
 
