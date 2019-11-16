@@ -115,8 +115,9 @@ module.exports = {
                 console.log("create volunteer", err)
             });
     },
-     // (PUT) that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
+     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
      finishChat: function (req, res) {
+         // TAKE THE USER OUT OF THE CHAT (LAST PERSON IN THE CHAT)
         const room = req.body.room
 
         db.Volunteer
@@ -126,7 +127,6 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
-                volunteermatch = volunteers[0]
             })
             .catch(err => {
                 res.status(422)
