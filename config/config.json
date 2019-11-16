@@ -1,9 +1,9 @@
 {
 	"development": {
-		"username": "b60814e88265c9",
-		"password": "961d279b",
+		"username": "root",
+		"password": "",
 		"database": "heroku_af0100799ed6eb1",
-		"host": "us-cdbr-iron-east-05.cleardb.net",
+		"host": "localhost",
 		"dialect": "mysql",
 		"operatorsAliases": false
 	},
@@ -16,11 +16,7 @@
 		"operatorsAliases": false
 	},
 	"production": {
-		"use_env_variable": "JAWSDB_URL",
-		"username": "b60814e88265c9",
-		"password": "961d279b",
-		"database": "heroku_af0100799ed6eb1",
-		"host": "us-cdbr-iron-east-05.cleardb.net",
+		"use_env_variable": "CLEARDB_ONYX_URL",
 		"dialect": "mysql",
 		"operatorsAliases": false
 	}
