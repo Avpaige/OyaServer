@@ -5,6 +5,7 @@ const volunteerController = require("../controllers/mongo-controller");
 // Matches with "/volunteer"
 router.route("/")
     .get(volunteerController.saveVolunteer)
+    .post(volunteerController.getVolunteer)
 
 // Matches with "/volunteer/room"
 router.route("/room")
@@ -13,13 +14,8 @@ router.route("/room")
 // Matches with "/volunteer/:mysqlID"
 router
     .route("/:mysqlID")
-    .post(volunteerController.getVolunteer)
-
-// Matches with "/volunteer/avail/app"
-router
-    .route("/avail/app")
     .put(volunteerController.appAvailUpdate)
-
+    
 // Matches with "/volunteer/avail/chat"
 router
     .route("/avail/chat")
