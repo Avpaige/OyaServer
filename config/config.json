@@ -8,9 +8,9 @@
 		"operatorsAliases": false
 	},
 	"test": {
-		"username": "b60814e88265c9",
-		"password": "961d279b",
-		"database": "heroku_af0100799ed6eb1",
+		"username": "b0de8c1f92993e",
+		"password": "9187b512",
+		"database": "heroku_59a75cdbee2442a",
 		"host": "us-cdbr-iron-east-05.cleardb.net",
 		"dialect": "mysql",
 		"operatorsAliases": false

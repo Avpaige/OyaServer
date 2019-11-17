@@ -1,49 +1,23 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-// const mysql = require("mysql");
-// const app = express();
 
 const router = express.Router();
 
-// grab the User model from the models folder, the sequelize
-// index.js file takes care of the exporting for us and the
-// syntax below is called destructuring, its an es6 feature
 const User = require("../models");
-
-// const connection = mysql.createConnection({
-// 	host: "us-cdbr-iron-east-05.cleardb.net",
-// 	user: "b60814e88265c9",
-// 	password: "961d279b",
-// 	database: "heroku_af0100799ed6eb1"
-// });
-
-// connection.connect(err => {
-// 	if (err) {
-// 		return err;
-// 	}
-// });
 
 /* Register Route
 ========================================================= */
 router.post("/register", async (req, res) => {
 	// hash the password provided by the user with bcrypt so that
-	// we are never storing plain text passwords. This is crucial
-	// for keeping your db clean of sensitive data
-	const hash = bcrypt.hashSync(req.body.password, 10);
-
+	// const hash = bcrypt.hashSync(req.body.password, 10);
+	let hash;
+	console.log(hash);
 	try {
-		// create a new user with the password hash from bcrypt
-		let user = await User.create(Object.assign(req.body, { password: hash }));
-		console.log(user);
-		// data will be an object with the user and it's authToken
-		// let data = await user.authorize();
-
-		// send back the new user and auth token to the
-		// NEED TO PASS ISABEL OBJECT (mysql ID)
-		res.send({ mysqlID: id });
-		// client { user, authToken }
-		return res.json(data);
+		hash = bcrypt.hashSync(req.body.password, 10);
+		console.log(hash);
+		return res.json({ passwordHash: hash });
 	} catch (err) {
+		console.log(err);
 		return res.status(400).send(err);
 	}
 });
@@ -77,20 +51,6 @@ router.post("/login", async (req, res) => {
 ========================================================= */
 router.post("/form", async (req, res) => {
 	// SAVE SQL INFORMATION (FIRST NAME, LAST NAME, EMAIL, PHONE NUMBER)
-	// connection.query(
-	// 	"INSERT INTO userinfo SET ?",
-	// 	{
-	// 		firstname: req.body.firstname,
-	// 		lastname: req.body.lastname,
-	// 		email: req.body.email,
-	// 		phonenumber: req.body.phonenumber
-	// 	},
-	// function (error, results) {
-	// 	// If some error occurs, we throw an error.
-	// 	if (error) throw error;
-	// 	// Getting the 'response' from the database and sending it to our route. This is were the data is.
-	// 	res.send(results);
-	// }
 });
 
 // /* Logout Route
