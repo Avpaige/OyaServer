@@ -72,7 +72,11 @@ module.exports = {
 
     // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
     volunteerRoom: function (req, res) {
-            
+            this.getVolunteer()
+            .then(socket =>{
+                let socket=mysqlID;
+                res.json({socket})
+            })
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
@@ -91,6 +95,9 @@ module.exports = {
             })
             .then(volunteers => {
                 volunteermatch = volunteers[0]
+                this.volunteerRoom();
+                //ISABEL THIS SHOULD ASSIGN THE VOLUNTEER ROOM AND THEN ON FRONT WILL NEED TO REDIRECT THEM TO CHAT URL.
+              
             })
             .catch(err => {
                 res.status(422)
