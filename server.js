@@ -1,3 +1,4 @@
+require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 //ALL DEPENDENCIES
 const express = require("express");
 const http = require("http");
@@ -6,11 +7,12 @@ const mongojs = require("mongojs");
 const cors = require("cors");
 const sequelize = require("sequelize");
 const ObjectID = mongojs.ObjectID;
-const mDB = mongojs(process.env.MONGO_URI || "mongodb://localhost:27017/chats");
+const mDB = mongojs(
+	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
+);
 const app = express();
 const server = http.Server(app);
 const websocket = socketio(server);
-require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -42,14 +44,6 @@ db.sequelize.sync({ force: false }).then(() => {
 	// app.listen(PORT, () => {
 	// 	console.log(`App listening on PORT ${PORT}`);
 	// });
-});
-
-server.listen(PORT, err => {
-	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
-	}
-	console.log("listening on *:3000");
 });
 
 // Mapping objects to easily map sockets and users.
@@ -228,3 +222,11 @@ app.use("/assets", express.static(clientDir));
 
 // hook up our controllers
 app.use(userController);
+
+server.listen(PORT, err => {
+	if (err) {
+		console.log(`Error starting server: ${err}`);
+		process.exit(1);
+	}
+	console.log("listening on *:3000");
+});
