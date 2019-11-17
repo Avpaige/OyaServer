@@ -3,31 +3,21 @@ const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
-// grab the User model from the models folder, the sequelize
-// index.js file takes care of the exporting for us and the
-// syntax below is called destructuring, its an es6 feature
 const User = require("../models");
 
 /* Register Route
 ========================================================= */
 router.post("/register", async (req, res) => {
 	// hash the password provided by the user with bcrypt so that
-	// we are never storing plain text passwords. This is crucial
-	// for keeping your db clean of sensitive data
-	const hash = bcrypt.hashSync(req.body.password, 10);
-
+	// const hash = bcrypt.hashSync(req.body.password, 10);
+	let hash;
+	console.log(hash);
 	try {
-		// create a new user with the password hash from bcrypt
-		let user = await User.create(Object.assign(req.body, { password: hash }));
-
-		// data will be an object with the user and it's authToken
-		let data = await user.authorize();
-
-		// send back the new user and auth token to the
-		// NEED TO PASS ISABEL OBJECT (mysql ID)
-		// client { user, authToken }
-		return res.json(data);
+		hash = bcrypt.hashSync(req.body.password, 10);
+		console.log(hash);
+		return res.json({ passwordHash: hash });
 	} catch (err) {
+		console.log(err);
 		return res.status(400).send(err);
 	}
 });
@@ -46,10 +36,11 @@ router.post("/login", async (req, res) => {
 	try {
 		let user = await User.authenticate(username, password);
 
-		user = await user.authorize();
-
+		// user = await user.authorize();
+		console.log(user);
 		return res.json(user);
 
+		// res.send({mysqlID: id});
 		// NEED TO PASS ISABEL OBJECT (mysql ID)
 	} catch (err) {
 		return res.status(400).send("invalid username or password");
