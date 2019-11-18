@@ -7,7 +7,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-            // mysqlID = req.body.mysqlID,
+//             mysqlID = req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -76,7 +76,7 @@ module.exports = {
     volunteerRoom: function (req, res) {
         this.getVolunteer()
             .then(socket => {
-                let socket = mysqlID;
+//                 let socket = mysqlID;
                 res.json({ socket })
             })
     },
@@ -96,6 +96,8 @@ module.exports = {
                 chatavail: appAvail,
             })
             .then(volunteers => {
+
+                console.log("app status of volunteer changed")
                 volunteermatch = volunteers[0]
                 this.volunteerRoom();
                 //ISABEL THIS SHOULD ASSIGN THE VOLUNTEER ROOM AND THEN ON FRONT WILL NEED TO REDIRECT THEM TO CHAT URL.
@@ -159,6 +161,7 @@ module.exports = {
                 console.log("volunteer notification", err)
             });
     },
+
 
     // (GET) - VOLUNTEER/USER (STATIC) - get socket number
     getStaticSocket: function (req, res) {

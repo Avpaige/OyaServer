@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const uuidv4 = require('uuid/v4');
 const Schema = mongoose.Schema;
 
 const VolunteerSchema = new Schema({
@@ -57,7 +57,7 @@ const VolunteerSchema = new Schema({
     type: Number,
     required: true,
     unique: true,
-    Default: null
+    Default: uuidv4(),
   }
 })
 
