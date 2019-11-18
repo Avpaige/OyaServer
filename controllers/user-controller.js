@@ -29,13 +29,13 @@ router.post("/register", async (req, res) => {
 					let id = results.id
 					return res.json({ mysqlID: id });
 				})
-				
+
 			} catch (err) {
 				console.log(err);
 				return res.status(400).send(err);
 			}
 		} else {
-			res.json({mysqlID: none})
+			res.json({ mysqlID: "none" })
 		}
 	})
 });
@@ -52,16 +52,35 @@ router.post("/login", async (req, res) => {
 		return res.status(400).send("Request missing username or password param");
 	}
 
-	try {
-		let user = await db.user.authenticate(username, hash);
+	// try {
+	// 	let user = await db.user.authenticate(username, hash);
 
-		// user = await user.authorize();
-		console.log(user);
-		return res.json({user});
+	// 	// user = await user.authorize();
+	// 	console.log(user);
+	// 	return res.json({user});
 
-	} catch (err) {
-		return res.status(400).send("invalid username or password");
-	}
+	// } catch (err) {
+	// 	return res.status(400).send("invalid username or password");
+	// }
+
+	db.user.findOne({ where: { username: username } }).then(results => {
+
+		hash = bcrypt.hashSync(password, 10);
+		// console.log(hash);
+		let enteredPass = results.password
+
+		if (hash === enteredPass) {
+
+			res.json({ mysqlID: results.id })
+
+		} else {
+			res.json({ mysqlID: "none" })
+		}
+
+	}).catch(err => {
+		console.log(err);
+		return res.status(400).send(err);
+	})
 });
 
 /* Login Route
