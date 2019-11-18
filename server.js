@@ -20,13 +20,12 @@ const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
 const io = require('socket.io')(http);
-const socketConnect = io.of('/talk');
+const nsp = io.of('/talk');
 
-
-socketConnect.on('connection', function(socket){
-  console.log('someone connected');
-});
-socketConnect.emit('hi', 'everyone!');
+nsp.on('connection', function(socket){
+	console.log('someone connected');
+  });
+  nsp.emit('hi', 'everyone!');
 
 // directory references
 const clientDir = path.join(__dirname, "../client");
