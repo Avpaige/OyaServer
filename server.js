@@ -20,7 +20,7 @@ const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
 const io = require('socket.io')(http);
-const nsp = io.of('/talk');
+const nsp = io.of('/socket/talk');
 
 nsp.on('connection', function(socket){
 	console.log('someone connected');
