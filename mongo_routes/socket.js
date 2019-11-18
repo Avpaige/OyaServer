@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const userController = require("../controllers/mongo-controller");
+const socketController = require("../controllers/socket-controller");
 
 // Matches with "/user/match"
 router.route("/talk")
-  .post(userController.getStaticSocket)
+  .post(socketController.getStaticSocket)
 
 module.exports = router;
