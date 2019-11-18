@@ -6,4 +6,11 @@ const socketController = require("../controllers/socket-controller");
 router.route("/talk")
   .post(socketController.getStaticSocket)
 
+const userController = require("../controllers/mongo-controller");
+
+// Matches with "/user/match"
+router.route("/talk")
+  .post(userController.getStaticSocket)
+
+
 module.exports = router;

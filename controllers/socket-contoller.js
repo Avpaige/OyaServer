@@ -1,7 +1,7 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const socketConnect = io.of('/avail/chat');
+const socketConnect = io.of('/socket/talk');
 
 socketConnect.on('connection', function(socket){
   console.log('someone connected');
