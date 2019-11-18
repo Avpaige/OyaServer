@@ -85,8 +85,26 @@ router.post("/login", async (req, res) => {
 
 /* Login Route
 ========================================================= */
-router.post("/form", async (req, res) => {
+router.put("/form", async (req, res) => {
 	// SAVE SQL INFORMATION (FIRST NAME, LAST NAME, EMAIL, PHONE NUMBER)
+	let firstname = req.body.firstname;
+	let lastname = req.body.lastname;
+	let email = req.body.email;
+	let phonenumber = req.body.phonenumber;
+
+	db.user.update({
+		firstname: firstname,
+		lastname: lastname,
+		email: email,
+		phonenumber: phonenumber,
+	},
+		{ where: req.body.mysqlID })
+		.then((results) => {
+			// console.log(results)
+			return res.json({ mysqlID: results.id });
+		})
+		.catch (err => console.error(err))
+
 });
 
 // /* Logout Route
