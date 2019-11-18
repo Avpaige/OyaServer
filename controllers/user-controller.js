@@ -1,9 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-
 const router = express.Router();
-
-const User = require("../models");
+const db = require("../models");
 
 /* Register Route
 ========================================================= */
@@ -11,22 +9,43 @@ router.post("/register", async (req, res) => {
 	// hash the password provided by the user with bcrypt so that
 	// const hash = bcrypt.hashSync(req.body.password, 10);
 	let hash;
-	console.log(hash);
-	try {
-		hash = bcrypt.hashSync(req.body.password, 10);
-		console.log(hash);
-		return res.json({ passwordHash: hash });
-	} catch (err) {
-		console.log(err);
-		return res.status(400).send(err);
-	}
+	// console.log(hash);
+	let username = req.body.username;
+	let password = req.body.password;
+
+	// SEARCH THROUGH USERNAME AND MAKE SURE IT IS UNIQUE
+	db.user.findOne({ where: { username: username } }).then(results => {
+		if (!results) {
+			// IF NO RESULTS THEN SEND SAVE
+			try {
+				hash = bcrypt.hashSync(password, 10);
+				console.log(hash);
+
+				db.user.create({
+					username: username,
+					password: hash
+				}).then((results) => {
+					// console.log(results)
+					let id = results.id
+					return res.json({ mysqlID: id });
+				})
+				
+			} catch (err) {
+				console.log(err);
+				return res.status(400).send(err);
+			}
+		} else {
+			res.json({})
+		}
+	})
 });
 
 /* Login Route
 ========================================================= */
 router.post("/login", async (req, res) => {
 	const { username, password } = req.body;
-
+	let hash;
+	hash = bcrypt.hashSync(password, 10);
 	// if the username / password is missing, we use status code 400
 	// indicating a bad request was made and send back a message
 	if (!username || !password) {
@@ -34,14 +53,12 @@ router.post("/login", async (req, res) => {
 	}
 
 	try {
-		let user = await User.authenticate(username, password);
+		let user = await db.user.authenticate(username, hash);
 
 		// user = await user.authorize();
 		console.log(user);
-		return res.json(user);
+		return res.json({user});
 
-		// res.send({mysqlID: id});
-		// NEED TO PASS ISABEL OBJECT (mysql ID)
 	} catch (err) {
 		return res.status(400).send("invalid username or password");
 	}
