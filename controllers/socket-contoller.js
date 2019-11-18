@@ -1,12 +1,3 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const socketConnect = io.of('/socket/talk');
-
-socketConnect.on('connection', function(socket){
-  console.log('someone connected');
-});
-socketConnect.emit('hi', 'everyone!');
 
 
 // // Save the message to the db and send all sockets but the sender.
@@ -30,6 +21,7 @@ module.exports = {
     // (GET) - VOLUNTEER/USER (STATIC) - get socket number
     getStaticSocket: function (req, res) {
       // code for static socket goes here
-
+        const socket=socket;
+        console.log(socket.id)
   },
 }
