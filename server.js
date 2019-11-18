@@ -19,7 +19,7 @@ const userController = require("./controllers/user-controller");
 const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
-const io = require('socket.io')(http);
+const io = require('socket.io')(server);
 const nsp = io.of('/socket/talk');
 
 nsp.on('connection', function(socket){
