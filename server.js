@@ -16,10 +16,17 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
-const socketController = require("./controllers/socket-contoller")
 const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
+const io = require('socket.io')(http);
+const socketConnect = io.of('/talk');
+
+
+socketConnect.on('connection', function(socket){
+  console.log('someone connected');
+});
+socketConnect.emit('hi', 'everyone!');
 
 // directory references
 const clientDir = path.join(__dirname, "../client");

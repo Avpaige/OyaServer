@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const socketController = require("../controllers/socket-controller");
+const socketController = require("../controllers/socket-contoller");
 
 // Matches with "/user/match"
 router.route("/talk")
