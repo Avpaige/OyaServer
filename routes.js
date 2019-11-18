@@ -40,8 +40,8 @@ app.post("/afterlogin", (req, res) => {
 // NEED TO PASS ISABEL OBJECT (mysql ID)
 
 // Starting our server.
-app.listen(3306, () => {
-	console.log(
-		"Go to http://localhost:3306/afterlogin so you can see the data."
-	);
-});
+// app.listen(3306, () => {
+// 	console.log(
+// 		"Go to http://localhost:3306/afterlogin so you can see the data."
+// 	);
+// });
