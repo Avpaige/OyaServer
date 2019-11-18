@@ -4,7 +4,6 @@ const express = require("express");
 const http = require("http");
 const mongojs = require("mongojs");
 const cors = require("cors");
-const sequelize = require("sequelize");
 const ObjectID = mongojs.ObjectID;
 const mDB = mongojs(
 	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
@@ -18,7 +17,6 @@ const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
 const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
-const mysql = require("mysql");
 const io = require('socket.io')(http);
 const nsp = io.of('/socket/talk');
 
