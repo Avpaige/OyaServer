@@ -162,12 +162,4 @@ module.exports = {
             });
     },
 
-
-    // (GET) - VOLUNTEER/USER (STATIC) - get socket number
-    getStaticSocket: function (req, res) {
-        // code for static socket goes here
-
-    },
-
-
 };
