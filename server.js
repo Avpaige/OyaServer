@@ -40,15 +40,12 @@ app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/index.html");
 });
 
-// CHANEL WE HAVE TWO LISTNERS NOW. COMMENTING THIS OUT
+
 // also udpated force to FALSE so that it wont delete all users everytime the server starts
 db.sequelize.sync({ force: false }).then(() => {
 	// inside our db sync callback, we start the server
 	// this is our way of making sure the server is not listening
 	// to requests if we have not made a db connection
-	// app.listen(PORT, () => {
-	// 	console.log(`App listening on PORT ${PORT}`);
-	// });
 });
 
 // Express middleware that allows POSTing data
