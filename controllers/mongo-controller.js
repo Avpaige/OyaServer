@@ -44,7 +44,7 @@ module.exports = {
         const native = req.body.native
         const languageNeeded = req.body.language
         db.Volunteer
-            .find({ 
+            .find({
                 $or: [
                     { "language1": { "$in": [languageNeeded] } },
                     { "language2": { "$in": [languageNeeded] } },
@@ -59,18 +59,27 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
-                if (volunteers.length > 1 ){
+                if (volunteers.length > 1) {
                     let volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
                     // res.send(volunteermatch)
                     console.log(volunteermatch)
-                }        
-                
+                }
+
             })
             .catch(err => {
                 res.status(422)
                 console.log("match user", err)
             });
+    },
+
+    // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
+    volunteerRoom: function (req, res) {
+        this.getVolunteer()
+            .then(socket => {
+                let socket = mysqlID;
+                res.json({ socket })
+            })
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
@@ -89,6 +98,9 @@ module.exports = {
             })
             .then(volunteers => {
                 volunteermatch = volunteers[0]
+                this.volunteerRoom();
+                //ISABEL THIS SHOULD ASSIGN THE VOLUNTEER ROOM AND THEN ON FRONT WILL NEED TO REDIRECT THEM TO CHAT URL.
+
             })
             .catch(err => {
                 res.status(422)
@@ -116,7 +128,7 @@ module.exports = {
             });
     },
 
-     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
+    // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
     finishChat: function (req, res) {
         // const room = req.body.room
         // const currentAvail = req.body.currentAvail
@@ -148,5 +160,12 @@ module.exports = {
                 console.log("volunteer notification", err)
             });
     },
+
+    // (GET) - VOLUNTEER/USER (STATIC) - get socket number
+    getStaticSocket: function (req, res) {
+        // code for static socket goes here
+
+    },
+
 
 };
