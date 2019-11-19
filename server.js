@@ -7,7 +7,9 @@ const ObjectID = mongojs.ObjectID;
 const mDB = mongojs(
 	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
 );
+const http = require("http");
 const app = express();
+const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -53,3 +55,10 @@ app.use("/assets", express.static(clientDir));
 // hook up our controllers
 app.use(userController);
 
+server.listen(PORT, err => {
+	if (err) {
+		console.log(`Error starting server: ${err}`);
+		process.exit(1);
+	}
+	console.log("listening on *:3000");
+});
