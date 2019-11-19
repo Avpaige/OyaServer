@@ -53,11 +53,11 @@ const VolunteerSchema = new Schema({
     required: true,
     Default: false
   },
-  roomNum: {
+  socket: {
     type: Number,
-    required: true,
-    unique: true,
-    Default: uuidv4(),
+    required: false,
+    // unique: true,
+    // Default: uuidv4(),
   }
 })
 
