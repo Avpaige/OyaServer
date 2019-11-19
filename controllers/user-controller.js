@@ -14,30 +14,31 @@ router.post("/register", async (req, res) => {
 	let password = req.body.password;
 
 	// SEARCH THROUGH USERNAME AND MAKE SURE IT IS UNIQUE
-	db.user.findOne({ where: { username: username } }).then(results => {
+	db.users.findOne({ where: { username: username } }).then(results => {
 		if (!results) {
 			// IF NO RESULTS THEN SEND SAVE
 			try {
 				hash = bcrypt.hashSync(password, 10);
 				console.log(hash);
 
-				db.user.create({
-					username: username,
-					password: hash
-				}).then((results) => {
-					// console.log(results)
-					let id = results.id
-					return res.json({ mysqlID: id });
-				})
-
+				db.users
+					.create({
+						username: username,
+						password: hash
+					})
+					.then(results => {
+						// console.log(results)
+						let id = results.id;
+						return res.json({ mysqlID: id });
+					});
 			} catch (err) {
 				console.log(err);
 				return res.status(400).send(err);
 			}
 		} else {
-			res.json({ mysqlID: "none" })
+			res.json({ mysqlID: "none" });
 		}
-	})
+	});
 });
 
 /* Login Route
@@ -63,24 +64,23 @@ router.post("/login", async (req, res) => {
 	// 	return res.status(400).send("invalid username or password");
 	// }
 
-	db.user.findOne({ where: { username: username } }).then(results => {
+	db.user
+		.findOne({ where: { username: username } })
+		.then(results => {
+			hash = bcrypt.hashSync(password, 10);
+			// console.log(hash);
+			let enteredPass = results.password;
 
-		hash = bcrypt.hashSync(password, 10);
-		// console.log(hash);
-		let enteredPass = results.password
-
-		if (hash === enteredPass) {
-
-			res.json({ mysqlID: results.id })
-
-		} else {
-			res.json({ mysqlID: "none" })
-		}
-
-	}).catch(err => {
-		console.log(err);
-		return res.status(400).send(err);
-	})
+			if (hash === enteredPass) {
+				res.json({ mysqlID: results.id });
+			} else {
+				res.json({ mysqlID: "none" });
+			}
+		})
+		.catch(err => {
+			console.log(err);
+			return res.status(400).send(err);
+		});
 });
 
 /* Login Route
@@ -92,19 +92,21 @@ router.put("/form", async (req, res) => {
 	let email = req.body.email;
 	let phonenumber = req.body.phonenumber;
 
-	db.user.update({
-		firstname: firstname,
-		lastname: lastname,
-		email: email,
-		phonenumber: phonenumber,
-	},
-		{ where: req.body.mysqlID })
-		.then((results) => {
+	db.user
+		.update(
+			{
+				firstname: firstname,
+				lastname: lastname,
+				email: email,
+				phonenumber: phonenumber
+			},
+			{ where: req.body.mysqlID }
+		)
+		.then(results => {
 			// console.log(results)
 			return res.json({ mysqlID: results.id });
 		})
-		.catch (err => console.error(err))
-
+		.catch(err => console.error(err));
 });
 
 // /* Logout Route
