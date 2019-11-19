@@ -55,9 +55,9 @@ const VolunteerSchema = new Schema({
   },
   socket: {
     type: Number,
-    required: false,
-    // unique: true,
-    // Default: uuidv4(),
+    required: true,
+    unique: true,
+    Default: uuidv4(),
   }
 })
 
