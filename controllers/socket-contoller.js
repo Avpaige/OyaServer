@@ -31,13 +31,6 @@ nsp.on('connection', function (socket) {
     });
 });
 
-server.listen(PORT, err => {
-	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
-	}
-	console.log("listening on *:3000");
-});
 
     module.exports = {
         nsp: io.of('/socket/talk')
