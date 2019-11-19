@@ -11,7 +11,7 @@
 </html>
 
 <script>
-  var socket = io.connect(`http://${window.location.host}/socket/talk`);
+  var socket = io.connect(`https://${window.location.host}/socket/talk`);
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
