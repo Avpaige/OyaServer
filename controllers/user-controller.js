@@ -91,7 +91,7 @@ router.put("/form", async (req, res) => {
 	let lastname = req.body.lastname;
 	let email = req.body.email;
 	let phonenumber = req.body.phonenumber;
-
+	console.log(phonenumber);
 	db.users
 		.update(
 			{
@@ -100,7 +100,7 @@ router.put("/form", async (req, res) => {
 				email: email,
 				phonenumber: phonenumber
 			},
-			{ where: req.body.mysqlID }
+			{ where: { id: req.body.mysqlID } }
 		)
 		.then(results => {
 			// console.log(results)
