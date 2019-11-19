@@ -1,27 +1,39 @@
+const express = require('express');
+const app = express();
+const server = http.Server(app);
+var port = process.env.PORT || 4000;
+const io = require('socket.io')(server);
+const nsp = io.of('/socket/talk');
 
+var sockets = {};
 
-// // Save the message to the db and send all sockets but the sender.
-// function _sendAndSaveMessage(message, socket, fromServer) {
-// 	var messageData = {
-// 		text: message.text,
-// 		user: message.user,
-// 		createdAt: new Date(message.createdAt),
-// 		chatId: chatId
-// 	};
+nsp.on('connection', function (socket) {
+    console.log('connection');
 
-// 	mDB.collection("messages").insert(messageData, (err, message) => {
-// 		// If the message is from the server, then send to everyone.
-// 		var emitter = fromServer ? websocket : socket.broadcast;
-// 		emitter.emit("message", [message]);
-// 	});
-// }
+    socket.on('add user', function (senderId) {
+        console.log('add user', senderId);
+        socket.sid = senderId;
+        sockets[socket.sid] = socket;
+    });
 
-module.exports = {
+    socket.on('new message', function (data) {
+        console.log('new message', data);
+  
+        {       sockets[data.recipientId].emit('new message', {
+                senderId: data.senderId,
+                recipientId: data.recipientId,
+                message: data.message
+            });
+        }
 
-    // (GET) - VOLUNTEER/USER (STATIC) - get socket number
-    getStaticSocket: function (req, res) {
-      // code for static socket goes here
-        const socket=socket;
-        console.log(socket.id)
-  },
-}
+    socket.on('disconnect', function () {
+            console.log(socket.sid, 'disconnected');
+            delete sockets[socket.sid];
+        });
+    });
+});
+
+    module.exports = {
+        nsp: io.of('/socket/talk')
+    }
+
