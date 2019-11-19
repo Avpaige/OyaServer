@@ -4,6 +4,6 @@ const socketController = require("../controllers/socket-contoller");
 
 // Matches with "/user/match"
 router.route("socket/talk")
-  .post(socketController.getStaticSocket)
+  .get(socketController.getStaticSocket)
 
 module.exports = router;

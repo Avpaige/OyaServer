@@ -7,10 +7,6 @@ router.route("/")
     .post(volunteerController.saveVolunteer) // FE: form
     .put(volunteerController.appAvailUpdate) // FE: account
 
-// Matches with "/volunteer/room" (in v-message)
-router.route("/room")
-    .get(volunteerController.volunteerRoom)
-
 // Matches with "/volunteer/:mysqlID" (in login)
 router
     .route("/:mysqlID")

@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const db = require("../models_mongo")
 
 module.exports = {
@@ -7,7 +6,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-//             mysqlID = req.body.mysqlID,
+            //             mysqlID = req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -61,7 +60,7 @@ module.exports = {
                 if (volunteers.length > 1) {
                     let volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
-                    // res.send(volunteermatch)
+                    res.send(volunteermatch)
                     console.log(volunteermatch)
                 }
 
@@ -70,15 +69,6 @@ module.exports = {
                 res.status(422)
                 console.log("match user", err)
             });
-    },
-
-    // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
-    volunteerRoom: function (req, res) {
-        this.getVolunteer()
-            .then(socket => {
-//                 let socket = mysqlID;
-                res.json({ socket })
-            })
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
