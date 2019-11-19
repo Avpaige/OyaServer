@@ -16,7 +16,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
-const mongoRoutes = require("./mongo_routes");
+// const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
 
