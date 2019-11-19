@@ -1,7 +1,6 @@
 require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 //ALL DEPENDENCIES
 const express = require("express");
-const http = require("http");
 const mongojs = require("mongojs");
 const cors = require("cors");
 const ObjectID = mongojs.ObjectID;
@@ -9,14 +8,14 @@ const mDB = mongojs(
 	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
 );
 const app = express();
-const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
-const mongoRoutes = require("./mongo_routes");
+// const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
+<<<<<<< HEAD
 const io = require('socket.io')(http);
 const nsp = io.of('/socket/talk');
 
@@ -25,6 +24,9 @@ nsp.on('connection', function(socket){
   });
   nsp.emit('hi', 'everyone!');
 
+=======
+const mysql = require("mysql");
+>>>>>>> e1de433490c4eec083aa0b947c1766616820f634
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
@@ -62,10 +64,3 @@ app.use("/assets", express.static(clientDir));
 // hook up our controllers
 app.use(userController);
 
-server.listen(PORT, err => {
-	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
-	}
-	console.log("listening on *:3000");
-});

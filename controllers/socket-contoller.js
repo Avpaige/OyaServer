@@ -1,27 +1,45 @@
+const express = require('express');
+const app = express();
+var PORT = process.env.PORT || 4000;
+const http = require("http");
+const server = http.Server(app);
+const io = require('socket.io')(server);
+const nsp = io.of('/socket/talk');
+var sockets = {};
 
+nsp.on('connection', function (socket) {
+    console.log('connection');
 
-// // Save the message to the db and send all sockets but the sender.
-// function _sendAndSaveMessage(message, socket, fromServer) {
-// 	var messageData = {
-// 		text: message.text,
-// 		user: message.user,
-// 		createdAt: new Date(message.createdAt),
-// 		chatId: chatId
-// 	};
+    socket.on('add user', function (senderId) {
+        console.log('add user', senderId);
+        socket.sid = senderId;
+        sockets[socket.sid] = socket;
+    });
 
-// 	mDB.collection("messages").insert(messageData, (err, message) => {
-// 		// If the message is from the server, then send to everyone.
-// 		var emitter = fromServer ? websocket : socket.broadcast;
-// 		emitter.emit("message", [message]);
-// 	});
-// }
+    socket.on('new message', function (data) {
+        console.log('new message', data);
+  
+        {       sockets[data.recipientId].emit('new message', {
+                message: data.message
+            });
+        }
 
-module.exports = {
+    socket.on('disconnect', function () {
+            console.log(socket.sid, 'disconnected');
+            delete sockets[socket.sid];
+        });
+    });
+});
 
-    // (GET) - VOLUNTEER/USER (STATIC) - get socket number
-    getStaticSocket: function (req, res) {
-      // code for static socket goes here
-        const socket=socket;
-        console.log(socket.id)
-  },
-}
+server.listen(PORT, err => {
+	if (err) {
+		console.log(`Error starting server: ${err}`);
+		process.exit(1);
+	}
+	console.log("listening on *:3000");
+});
+
+    module.exports = {
+        nsp: io.of('/socket/talk')
+    }
+
