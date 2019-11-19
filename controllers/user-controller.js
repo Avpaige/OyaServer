@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
 	// 	return res.status(400).send("invalid username or password");
 	// }
 
-	db.user
+	db.users
 		.findOne({ where: { username: username } })
 		.then(results => {
 			hash = bcrypt.hashSync(password, 10);
@@ -92,7 +92,7 @@ router.put("/form", async (req, res) => {
 	let email = req.body.email;
 	let phonenumber = req.body.phonenumber;
 
-	db.user
+	db.users
 		.update(
 			{
 				firstname: firstname,
