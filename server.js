@@ -19,13 +19,6 @@ const userController = require("./controllers/user-controller");
 const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
 const mysql = require("mysql");
-const io = require('socket.io')(server);
-const nsp = io.of('/socket/talk');
-
-nsp.on('connection', function(socket){
-	console.log('someone connected');
-  });
-  nsp.emit('hi', 'everyone!');
 
 // directory references
 const clientDir = path.join(__dirname, "../client");
