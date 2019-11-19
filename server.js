@@ -15,14 +15,6 @@ const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
 // const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
-const io = require('socket.io')(http);
-const nsp = io.of('/socket/talk');
-
-nsp.on('connection', function(socket){
-	console.log('someone connected');
-  });
-  nsp.emit('hi', 'everyone!');
-
 const mysql = require("mysql");
 // directory references
 const clientDir = path.join(__dirname, "../client");
