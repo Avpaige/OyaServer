@@ -15,7 +15,6 @@ const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
 // const mongoRoutes = require("./mongo_routes");
 var fs = require("fs");
-<<<<<<< HEAD
 const io = require('socket.io')(http);
 const nsp = io.of('/socket/talk');
 
@@ -24,9 +23,7 @@ nsp.on('connection', function(socket){
   });
   nsp.emit('hi', 'everyone!');
 
-=======
 const mysql = require("mysql");
->>>>>>> e1de433490c4eec083aa0b947c1766616820f634
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
