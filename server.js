@@ -7,7 +7,9 @@ const ObjectID = mongojs.ObjectID;
 const mDB = mongojs(
 	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
 );
+const http = require("http");
 const app = express();
+const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -58,3 +60,10 @@ app.listen(PORT, function() {
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
 
+server.listen(PORT, err => {
+	if (err) {
+		console.log(`Error starting server: ${err}`);
+		process.exit(1);
+	}
+	console.log("listening on *:3000");
+});

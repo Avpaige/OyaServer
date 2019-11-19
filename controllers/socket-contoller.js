@@ -18,28 +18,24 @@ nsp.on('connection', function (socket) {
 
     socket.on('new message', function (data) {
         console.log('new message', data);
-  
-        {       sockets[data.recipientId].emit('new message', {
+
+        {
+            sockets[data.recipientId].emit('new message', {
                 message: data.message
             });
         }
 
-    socket.on('disconnect', function () {
+        socket.on('disconnect', function () {
             console.log(socket.sid, 'disconnected');
             delete sockets[socket.sid];
         });
     });
 });
 
-server.listen(PORT, err => {
-	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
-	}
-	console.log("listening on *:3000");
-});
 
-    module.exports = {
+module.exports = {
+    getStaticSocket: {
         nsp: io.of('/socket/talk')
     }
+}
 
