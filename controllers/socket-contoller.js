@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
+var PORT = process.env.PORT || 4000;
+const http = require("http");
 const server = http.Server(app);
-var port = process.env.PORT || 4000;
 const io = require('socket.io')(server);
 const nsp = io.of('/socket/talk');
 
@@ -31,6 +32,14 @@ nsp.on('connection', function (socket) {
             delete sockets[socket.sid];
         });
     });
+});
+
+server.listen(PORT, err => {
+	if (err) {
+		console.log(`Error starting server: ${err}`);
+		process.exit(1);
+	}
+	console.log("listening on *:3000");
 });
 
     module.exports = {
