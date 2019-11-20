@@ -111,16 +111,17 @@ module.exports = {
     // (PUT) - VOLUNTEER -  updating chat availibility of volunteer (prevents other users to connect with them) - seeing if they are with someone
     chatAvailUpdate: function (req, res) {
         // if socket is full there is a put call that (triggered by the user) to make chat avail false
-        const room = req.body.room
+        const room = req.body.socket
 
         db.Volunteer
             .findOneAndUpdate({
-                room: room
+                socket: room
             }, {
                 chatavail: false
             })
             .then(volunteers => {
-                volunteermatch = volunteers[0]
+                res.send(volunteers)
+                console.log(volunteers)
             })
             .catch(err => {
                 res.status(422)
@@ -130,26 +131,27 @@ module.exports = {
 
     // (PUT) - VOLUNTEER - that pushes the user out of the chat when it's done (but it is done from the volunteer when conversation is done)
     finishChat: function (req, res) {
-        // const room = req.body.room
-        // const currentAvail = req.body.currentAvail
+        // if socket is full there is a put call that (triggered by the user) to make chat avail false
+        const room = req.body.socket
 
-        // db.Volunteer
-        //     .findOneAndUpdate({
-        //         room: room
-        //     }, {
-        //         chatavail: currentAvail
-        //     })
-        //     .then(volunteers => {
-        //         volunteermatch = volunteers[0]
-        //     })
-        //     .catch(err => {
-        //         res.status(422)
-        //         console.log("create volunteer", err)
-        //     });
+        db.Volunteer
+            .findOneAndUpdate({
+                socket: room
+            }, {
+                chatavail: true
+            })
+            .then(volunteers => {
+                res.send(volunteers)
+                console.log(volunteers)
+            })
+            .catch(err => {
+                res.status(422)
+                console.log("volunteer chat avail", err)
+            });
     },
 
     // (GET) - VOLUNTEER - get call to trigger Front end(FE) notification
-    getMessageVolunteer: function (req, res) {
+    getMessageVolunteerAlert: function (req, res) {
         // mysqlID will be the /:mysqlID
         const id = req.params.mysqlID
         db.Volunteer
