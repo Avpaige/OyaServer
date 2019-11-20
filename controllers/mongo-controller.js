@@ -97,10 +97,8 @@ module.exports = {
                 }
             })
             .then(volunteers => {
-
                 console.log("app status of volunteer changed")
                 // console.log(volunteers)
-                volunteermatch = volunteers[0]
 
             })
             .catch(err => {
