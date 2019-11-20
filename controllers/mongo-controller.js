@@ -6,7 +6,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-            mysqlId: req.body.mysqlID,
+            mysqlID: req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -20,7 +20,7 @@ module.exports = {
         db.Volunteer
             .create(volunteer)
             .then(dbVolunteer => {
-                res.json(dbVolunteer)
+                res.json(dbVolunteer[0])
                 // console.log(dbVolunteer)
             })
             .catch(err => {
@@ -33,9 +33,13 @@ module.exports = {
     getVolunteer: function (req, res) {
         // mysqlID will be the /:mysqlID
         const id = req.params.mysqlID
+        // console.log(id)
         db.Volunteer
             .find({ mysqlID: id })
-            .then(dbVolunteer => res.json(dbVolunteer))
+            .then(dbVolunteer => {
+                res.json(dbVolunteer)
+                console.log(dbVolunteer)
+            })
             .catch(err => {
                 res.status(422)
                 console.log("get volunteer", err)
@@ -86,16 +90,17 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
-                // We want to update that if they toggle the messages on set everything on or off
-                appavail: appAvail,
-                chatavail: appAvail,
+                $set: {
+                    // We want to update that if they toggle the messages on set everything on or off
+                    appavail: appAvail,
+                    chatavail: appAvail,
+                }
             })
             .then(volunteers => {
 
                 console.log("app status of volunteer changed")
+                // console.log(volunteers)
                 volunteermatch = volunteers[0]
-                this.volunteerRoom();
-                //ISABEL THIS SHOULD ASSIGN THE VOLUNTEER ROOM AND THEN ON FRONT WILL NEED TO REDIRECT THEM TO CHAT URL.
 
             })
             .catch(err => {
