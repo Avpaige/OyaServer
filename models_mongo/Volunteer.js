@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 const Schema = mongoose.Schema;
 
 const VolunteerSchema = new Schema({
-  mysqlID: {
+  mysqlId: {
     type: Number,
     required: true,
     unique: true

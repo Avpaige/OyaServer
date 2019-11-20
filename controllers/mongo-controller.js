@@ -6,7 +6,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-            //             mysqlID = req.body.mysqlID,
+            mysqlId: req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -15,6 +15,8 @@ module.exports = {
             proficiency2: req.body.proficiency2,
             proficiency3: req.body.proficiency3,
         };
+
+        // console.log(volunteer)
         db.Volunteer
             .create(volunteer)
             .then(dbVolunteer => res.json(dbVolunteer))

@@ -19,7 +19,8 @@ const mongoRoutes = require("./mongo_routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = process.env.PORT || 8080;
+const PORT = 8000;
+// const PORT = process.env.PORT || 8000;
 // Requiring our models for syncing
 const db = require("./models");
 
@@ -56,14 +57,11 @@ app.use(userController);
 app.use(mongoRoutes);
 
 // Start the API server
-app.listen(PORT, function() {
-	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+app.listen(PORT, function(res, err) {
+	console.log(`🌎  ==> OYA Server now listening on PORT ${PORT}!`);
+
+	if (err) {
+		console.err("there is an ERROR", err)
+	}
   });
 
-server.listen(PORT, err => {
-	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
-	}
-	console.log("listening on *:3000");
-});
