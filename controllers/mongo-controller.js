@@ -1,4 +1,4 @@
-const express = require("express");
+const uuidv4 = require('uuid/v4');
 const db = require("../models_mongo")
 
 module.exports = {
@@ -14,6 +14,7 @@ module.exports = {
             proficiency1: req.body.proficiency1,
             proficiency2: req.body.proficiency2,
             proficiency3: req.body.proficiency3,
+            socket: uuidv4()
         };
 
         // console.log(volunteer)
@@ -85,16 +86,16 @@ module.exports = {
         // update avail and if true set socket
         const mysqlID = req.body.mysqlID
         const appAvail = req.body.massageAvail
+        // console.log(mysqlID)
 
         db.Volunteer
-            .findOneAndUpdate({
+            .updateOne({
                 mysqlID: mysqlID
             }, {
-                $set: {
-                    // We want to update that if they toggle the messages on set everything on or off
-                    appavail: appAvail,
-                    chatavail: appAvail,
-                }
+                // We want to update that if they toggle the messages on set everything on or off
+                appavail: appAvail,
+                chatavail: appAvail,
+
             })
             .then(volunteers => {
                 console.log("app status of volunteer changed")
