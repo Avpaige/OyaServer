@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uuidv4 = require('uuid/v4');
 const Schema = mongoose.Schema;
 
 const VolunteerSchema = new Schema({
@@ -53,11 +52,9 @@ const VolunteerSchema = new Schema({
     Default: false
   },
   socket: {
-    type: Number,
+    type: String,
     unique: true,
-    Default: () => {
-      return uuidv4()
-    }
+    required: true,
   }
 })
 
