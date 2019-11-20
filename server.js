@@ -1,12 +1,8 @@
 require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 //ALL DEPENDENCIES
 const express = require("express");
-const mongojs = require("mongojs");
+const mongoose = require("mongoose");
 const cors = require("cors");
-const ObjectID = mongojs.ObjectID;
-const mDB = mongojs(
-	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
-);
 const http = require("http");
 const app = express();
 const server = http.Server(app);
@@ -54,6 +50,8 @@ app.use("/assets", express.static(clientDir));
 // hook up our controllers (MYSQL)
 app.use(userController);
 // MONGO ROUTED CONNECTION
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 app.use(mongoRoutes);
 
 // Start the API server

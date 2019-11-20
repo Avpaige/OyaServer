@@ -19,7 +19,10 @@ module.exports = {
         // console.log(volunteer)
         db.Volunteer
             .create(volunteer)
-            .then(dbVolunteer => res.json(dbVolunteer))
+            .then(dbVolunteer => {
+                res.json(dbVolunteer)
+                // console.log(dbVolunteer)
+            })
             .catch(err => {
                 res.status(422)
                 console.log("create volunteer", err)
