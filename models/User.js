@@ -20,6 +20,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
     })
 
     Users.sync();

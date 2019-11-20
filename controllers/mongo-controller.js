@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const db = require("../models_mongo")
 
 module.exports = {
@@ -7,7 +6,7 @@ module.exports = {
     // (POST) - VOLUNTEER - saving VOLUNTEER INFORMATION
     saveVolunteer: function (req, res) {
         const volunteer = {
-//             mysqlID = req.body.mysqlID,
+            mysqlID: req.body.mysqlID,
             language1: req.body.language1,
             language2: req.body.language2,
             language3: req.body.language3,
@@ -16,9 +15,14 @@ module.exports = {
             proficiency2: req.body.proficiency2,
             proficiency3: req.body.proficiency3,
         };
+
+        // console.log(volunteer)
         db.Volunteer
             .create(volunteer)
-            .then(dbVolunteer => res.json(dbVolunteer))
+            .then(dbVolunteer => {
+                res.json(dbVolunteer[0])
+                // console.log(dbVolunteer)
+            })
             .catch(err => {
                 res.status(422)
                 console.log("create volunteer", err)
@@ -29,9 +33,13 @@ module.exports = {
     getVolunteer: function (req, res) {
         // mysqlID will be the /:mysqlID
         const id = req.params.mysqlID
+        // console.log(id)
         db.Volunteer
             .find({ mysqlID: id })
-            .then(dbVolunteer => res.json(dbVolunteer))
+            .then(dbVolunteer => {
+                res.json(dbVolunteer)
+                console.log(dbVolunteer)
+            })
             .catch(err => {
                 res.status(422)
                 console.log("get volunteer", err)
@@ -61,7 +69,7 @@ module.exports = {
                 if (volunteers.length > 1) {
                     let volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
-                    // res.send(volunteermatch)
+                    res.send(volunteermatch)
                     console.log(volunteermatch)
                 }
 
@@ -70,15 +78,6 @@ module.exports = {
                 res.status(422)
                 console.log("match user", err)
             });
-    },
-
-    // (GET) - VOLUNTEER - getting socket number for VOLUNTEER
-    volunteerRoom: function (req, res) {
-        this.getVolunteer()
-            .then(socket => {
-//                 let socket = mysqlID;
-                res.json({ socket })
-            })
     },
 
     // (PUT) - VOLUNTEER - updating message job availibility of volunteer (opens a new socket)
@@ -91,16 +90,15 @@ module.exports = {
             .findOneAndUpdate({
                 mysqlID: mysqlID
             }, {
-                // We want to update that if they toggle the messages on set everything on or off
-                appavail: appAvail,
-                chatavail: appAvail,
+                $set: {
+                    // We want to update that if they toggle the messages on set everything on or off
+                    appavail: appAvail,
+                    chatavail: appAvail,
+                }
             })
             .then(volunteers => {
-
                 console.log("app status of volunteer changed")
-                volunteermatch = volunteers[0]
-                this.volunteerRoom();
-                //ISABEL THIS SHOULD ASSIGN THE VOLUNTEER ROOM AND THEN ON FRONT WILL NEED TO REDIRECT THEM TO CHAT URL.
+                // console.log(volunteers)
 
             })
             .catch(err => {

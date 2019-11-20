@@ -20,44 +20,44 @@ const VolunteerSchema = new Schema({
     required: true,
     Default: false
   },
+  language3: {
+    language2: " ",
+    type: String,
+    required: false,
+  },
   proficiency1: {
     proficiency1: " ",
     type: String,
     required: true,
-    Default: false
   },
   proficiency2: {
     proficiency2: " ",
     type: String,
     required: true,
-    Default: false
   },
   proficiency3: {
     proficiency3: " ",
     type: String,
-    required: true,
-    Default: false
+    required: false,
   },
   appavail: {
     type: Boolean,
-    required: true,
     Default: false
   },
   chatavail: {
     type: Boolean,
-    required: true,
     Default: false
   },
   room: {
     type: Boolean,
-    required: true,
     Default: false
   },
   socket: {
     type: Number,
-    required: true,
     unique: true,
-    Default: uuidv4(),
+    Default: () => {
+      return uuidv4()
+    }
   }
 })
 

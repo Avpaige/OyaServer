@@ -1,12 +1,8 @@
 require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 //ALL DEPENDENCIES
 const express = require("express");
-const mongojs = require("mongojs");
+const mongoose = require("mongoose");
 const cors = require("cors");
-const ObjectID = mongojs.ObjectID;
-const mDB = mongojs(
-	process.env.MONGODB_URI || "mongodb://localhost:27017/chats"
-);
 const http = require("http");
 const app = express();
 const server = http.Server(app);
@@ -15,13 +11,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
-// const mongoRoutes = require("./mongo_routes");
-var fs = require("fs");
-const mysql = require("mysql");
+const mongoRoutes = require("./mongo_routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = process.env.PORT || 8080;
+const PORT = 8000;
+// const PORT = process.env.PORT || 8000;
 // Requiring our models for syncing
 const db = require("./models");
 
@@ -52,13 +47,19 @@ app.use(customAuthMiddleware);
 // assets from the client
 app.use("/assets", express.static(clientDir));
 
-// hook up our controllers
+// hook up our controllers (MYSQL)
 app.use(userController);
+// MONGO ROUTED CONNECTION
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+app.use(mongoRoutes);
 
-server.listen(PORT, err => {
+// Start the API server
+app.listen(PORT, function(res, err) {
+	console.log(`🌎  ==> OYA Server now listening on PORT ${PORT}!`);
+
 	if (err) {
-		console.log(`Error starting server: ${err}`);
-		process.exit(1);
+		console.err("there is an ERROR", err)
 	}
-	console.log("listening on *:3000");
-});
+  });
+
