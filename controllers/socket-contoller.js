@@ -6,26 +6,22 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const nsp = io.of("/socket/talk/:socket")
 var sockets = {};
+var msg =""
 
-module.exports = {
+nsp.on('connection', function (socket) {
+    console.log('connection');
 
-    getStaticSocket: function () {
-          nsp.on('connection', function (socket) {
-            console.log('connection');
-
-            socket.on('connection', function (socket) {
-                socket.on('chat message', function (msg) {
-                    io.emit('chat message', msg);
-                });
-            });
-
-
-            socket.on('connection', function (socket) {
-                socket.leave('some room');
-            });
+    socket.on('connection', function (socket) {
+        socket.on('chat message', function (msg) {
+            io.emit('chat message', msg);
         });
-    }
-}
+    });
+
+
+    socket.on('connection', function (socket) {
+        socket.leave('some room');
+    });
+});
 
 
 
