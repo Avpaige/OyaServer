@@ -3,12 +3,14 @@ const app = express();
 var PORT = process.env.PORT || 4000;
 const http = require("http");
 const server = http.Server(app);
-const io = require('socket.io')(server);
-const nsp = io.of('socket/talk/:socket');
+// const io = require('socket.io')(server);
+// const nsp = io.of(`socket/talk/${req.params.socket}`);
 var sockets = {};
 
 module.exports = {
-    getStaticSocket: function () {
+    getStaticSocket: function () {\
+        const io = require('socket.io')(server);
+        const nsp = io.of(`socket/talk/${req.params.socket}`);
         nsp.on('connection', function (socket) {
             console.log('connection');
 
