@@ -36,24 +36,6 @@ app.post("/afterlogin", (req, res) => {
 	);
 });
 
-app.post("/listdata", (req, res) => {
-	// Connecting to the database.
-	connection.query(
-		"SELECT * FROM users",
-		{
-			username: req.body.username,
-			password: req.body.password
-		},
-		function(error, results) {
-			// If some error occurs, we throw an error.
-			if (error) throw error;
-
-			// Getting the 'response' from the database and sending it to our route. This is were the data is.
-			res.send(results);
-		}
-	);
-});
-
 // NEED TO PASS ISABEL OBJECT (mysql ID)
 
 // Starting our server.
