@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
 	db.users
 		.findOne({ where: { username: username } })
 		.then(results => {
-			hash = bcrypt.hashSync(password, 10);
+			res.json(results)
 			// console.log(hash);
 			let enteredPass = results.password;
 
