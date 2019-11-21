@@ -11,6 +11,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
+require("./controllers/socket-controller");
 const mongoRoutes = require("./mongo_routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
