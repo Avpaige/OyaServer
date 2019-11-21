@@ -10,6 +10,8 @@ module.exports = server => {
             });
         });
 
+        socket.emit('connected_success')
+
     });
 
     io.on('connection', function(socket) {
