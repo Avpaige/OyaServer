@@ -11,7 +11,11 @@
 </html>
 
 <script>
-  var socket = io.connect(`${window.location.protocol}//${window.location.host}`, {"path":"/socket/talk/123"});
+  //var socket = io.connect(`${window.location.protocol}//${window.location.host}`, {"path":"/socket/talk/123"});
+  // var socket = io.connect(`${window.location.protocol}//${window.location.host}`);
+  var socket = io.connect(`${window.location.protocol}//${window.location.host}/talk`);
+
+
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
