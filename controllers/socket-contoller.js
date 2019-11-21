@@ -17,10 +17,9 @@ nsp.on('connection', function (socket) {
         });
     });
 
-
-    socket.on('connection', function (socket) {
-        socket.leave('some room');
-    });
+    // socket.on('connection', function (socket) {
+    //     socket.leave('some room');
+    // });
 });
 
 
