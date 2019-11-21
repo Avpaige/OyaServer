@@ -1,7 +1,3 @@
-
-
-var sockets = {};
-var msg = ""
 module.exports = server => {
     const io = require('socket.io')(server);
     const nsp = io.of("/talk")
@@ -14,9 +10,6 @@ module.exports = server => {
             });
         });
 
-        // socket.on('connection', function (socket) {
-        //     socket.leave('some room');
-        // });
     });
 
     io.on('connection', function(socket) {
