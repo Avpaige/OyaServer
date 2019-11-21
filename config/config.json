@@ -1,7 +1,7 @@
 {
 	"development": {
 		"username": "root",
-		"password": null,
+		"password": "password",
 		"database": "heroku_af0100799ed6eb1",
 		"host": "localhost",
 		"dialect": "mysql",
