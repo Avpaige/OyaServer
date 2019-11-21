@@ -15,8 +15,13 @@ router.post("/register", async (req, res) => {
 	// SEARCH THROUGH USERNAME AND MAKE SURE IT IS UNIQUE
 	db.users.findAll({ where: {username: username} }).then(results => {
 		// console.log(results)
-		if (!results) {
+		// res.send(results)
+		if (results === []) {
 			// IF NO RESULTS THEN SEND SAVE
+			res.json({ mysqlID: "none" });
+			
+		} else {
+
 			try {
 				hash = bcrypt.hashSync(password, 10);
 				console.log(hash);
@@ -28,6 +33,7 @@ router.post("/register", async (req, res) => {
 					})
 					.then(results => {
 						// console.log(results)
+						// res.send(results)
 						let id = results.id;
 						return res.json({ mysqlID: id });
 					});
@@ -36,8 +42,6 @@ router.post("/register", async (req, res) => {
 				return res.status(400).send(err);
 			}
 			
-		} else {
-			res.json({ mysqlID: "none" });
 		}
 	});
 });
