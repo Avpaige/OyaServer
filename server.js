@@ -15,8 +15,7 @@ const mongoRoutes = require("./mongo_routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
 // set up the Express App
-const PORT = 8000;
-// const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000;
 // Requiring our models for syncing
 const db = require("./models");
 
