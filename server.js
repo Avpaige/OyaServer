@@ -11,7 +11,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const customAuthMiddleware = require("./middelware/custom-auth-middleware");
 const userController = require("./controllers/user-controller");
-require("./controllers/socket-contoller");
+require("./controllers/socket-contoller")(server);
 const mongoRoutes = require("./mongo_routes");
 // directory references
 const clientDir = path.join(__dirname, "../client");
@@ -50,12 +50,14 @@ app.use("/assets", express.static(clientDir));
 // hook up our controllers (MYSQL)
 app.use(userController);
 // MONGO ROUTED CONNECTION
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).catch(err => {
+	console.log(`Unable to connect to mongoose:: ${err}`)
+});
 mongoose.Promise = global.Promise;
 app.use(mongoRoutes);
 
 // Start the API server
-app.listen(PORT, function(res, err) {
+server.listen(PORT, function(res, err) {
 	console.log(`🌎  ==> OYA Server now listening on PORT ${PORT}!`);
 
 	if (err) {
