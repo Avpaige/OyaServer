@@ -50,8 +50,7 @@ router.post("/register", async (req, res) => {
 ========================================================= */
 router.post("/login", async (req, res) => {
 	const { username, password } = req.body;
-	let hash;
-	hash = bcrypt.hashSync(password, 10);
+	
 	// if the username / password is missing, we use status code 400
 	// indicating a bad request was made and send back a message
 	if (!username || !password) {
@@ -72,15 +71,17 @@ router.post("/login", async (req, res) => {
 	db.users
 		.findOne({ where: { username: username } })
 		.then(results => {
-			res.json(results)
+			// res.json(results)
 			// console.log(hash);
 			let enteredPass = results.password;
 
-			if (hash === enteredPass) {
-				res.json({ mysqlID: results.id });
-			} else {
-				res.json({ mysqlID: "none" });
-			}
+			bcrypt.compare(password, enteredPass, function (err, confirm) {
+				if (confirm) {
+					res.json({ mysqlID: results.id });
+				} else {
+					res.json({ mysqlID: "none" });
+				}
+			})
 		})
 		.catch(err => {
 			console.log(err);
