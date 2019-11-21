@@ -7,6 +7,6 @@ const socketRoutes = require("./socket.js");
 // Routes
 router.use("/volunteer", volunteerRoute);
 router.use("/user", userRoutes);
-router.use("/socket", socketRoutes);
+// router.use("/socket", socketRoutes);
 
 module.exports = router;
