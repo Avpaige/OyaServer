@@ -21,7 +21,7 @@ module.exports = {
         db.Volunteer
             .create(volunteer)
             .then(dbVolunteer => {
-                res.json(dbVolunteer[0])
+                res.json(dbVolunteer.socket)
                 // console.log(dbVolunteer)
             })
             .catch(err => {
