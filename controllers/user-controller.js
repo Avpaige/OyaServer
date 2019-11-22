@@ -18,10 +18,6 @@ router.post("/register", async (req, res) => {
 		// res.send(results)
 		if (results === []) {
 			// IF NO RESULTS THEN SEND SAVE
-			res.json({ mysqlID: "none" });
-			
-		} else {
-
 			try {
 				hash = bcrypt.hashSync(password, 10);
 				console.log(hash);
@@ -41,6 +37,10 @@ router.post("/register", async (req, res) => {
 				console.log(err);
 				return res.status(400).send(err);
 			}
+			
+		} else {
+
+			res.json({ mysqlID: "none" });
 			
 		}
 	});
