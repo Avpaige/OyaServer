@@ -65,7 +65,11 @@ router.post("/login", async (req, res) => {
 
 			bcrypt.compare(password, enteredPass, function (err, confirm) {
 				if (confirm) {
-					res.json({ mysqlID: results.id });
+					res.json({ 
+						mysqlID: results.id,
+						firstname: results.firstname,
+						lastname: results.lastname
+					 });
 				} else {
 					res.json({ mysqlID: "none" });
 				}
