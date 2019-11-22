@@ -15,8 +15,8 @@ router.post("/register", async (req, res) => {
 	// SEARCH THROUGH USERNAME AND MAKE SURE IT IS UNIQUE
 	db.users.findAll({ where: {username: username} }).then(results => {
 		// console.log(results)
-		// res.send(results)
-		if (results === []) {
+		// res.send({result: results.length})
+		if (results.length === 0) {
 			// IF NO RESULTS THEN SEND SAVE
 			try {
 				hash = bcrypt.hashSync(password, 10);
@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
 			}
 			
 		} else {
-
+			// res.send({ results: results });
 			res.json({ mysqlID: "none" });
 			
 		}
