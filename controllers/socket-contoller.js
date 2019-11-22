@@ -37,12 +37,23 @@ module.exports = server => {
             socket.broadcast.to(room).emit('broadcast', message);
         });
 
+<<<<<<< HEAD
         socket.on('disconnection', (room) => {
 
             socket.leave(room);
             var i = rooms.indexOf(room);
             rooms.splice(i, 1);
         });
+=======
+        // socket.on('disconnect', function (socket) {
+        //     console.log(socket)
+        //     socket.emit('disconnection', function (room) {
+        //         // socket.leave(room);
+        //         // var i = rooms.indexOf(room);
+        //         // rooms.splice(i, 1);
+        //     });
+        // });
+>>>>>>> f67fcc07eee1455e34b6c51bb60e0af28a362fe2
     });
 
     io.on('connection', function (socket) {
