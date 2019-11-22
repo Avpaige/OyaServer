@@ -67,13 +67,14 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
+                // res.send(volunteers)
                 if (volunteers.length > 1) {
-                    let volunteermatch = volunteers[0]
+                    const volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
-                    res.send(volunteermatch.socket)
-                    console.log(volunteermatch)
+                    res.json(volunteermatch.socket)
+                    // console.log(volunteermatch)
                 } else {
-                    res.send(volunteers.socket)
+                    res.json(volunteers.socket)
                 }
             })
             .catch(err => {
