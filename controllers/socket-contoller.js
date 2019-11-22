@@ -1,3 +1,4 @@
+// // NON-ROOM WORKING CODE (SIMPLE VERSION)
 // module.exports = server => {
 //     const io = require('socket.io')(server);
 //     const nsp = io.of("/talk")
@@ -18,6 +19,7 @@
 
 
 // }
+
 module.exports = server => {
     const io = require('socket.io')(server);
     const nsp = io.of("/talk")

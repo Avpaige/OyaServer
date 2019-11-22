@@ -70,10 +70,11 @@ module.exports = {
                 if (volunteers.length > 1) {
                     let volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
-                    res.send(volunteermatch)
+                    res.send(volunteermatch.socket)
                     console.log(volunteermatch)
+                } else {
+                    res.send(volunteers.socket)
                 }
-
             })
             .catch(err => {
                 res.status(422)
