@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
 const app = express();
+const morgan = require('morgan')
+app.use(morgan('combined'))
 const server = http.Server(app);
 const bodyParser = require("body-parser");
 const path = require("path");
