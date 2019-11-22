@@ -24,7 +24,7 @@ module.exports = server => {
     const nsp = io.of("/talk")
     // let rooms = []
 
-    io.on('connection', function (socket) {
+    nsp.on('connection', function (socket) {
 
         socket.emit('connected_success')
 
