@@ -21,14 +21,14 @@
 module.exports = server => {
     const io = require('socket.io')(server);
     const nsp = io.of("/talk")
-    // let rooms = []
+    let rooms = []
 
     nsp.on('connection', function (socket) {
         socket.emit('connected_success')
 
         socket.on('room', (room) => {
             socket.join(room);
-            // rooms.push(room);
+            rooms.push(room);
         });
 
         socket.on('chat message', (data) => {
@@ -37,14 +37,11 @@ module.exports = server => {
             socket.broadcast.to(room).emit('broadcast', message);
         });
 
-    });
+        socket.on('disconnection', (room) => {
 
-    nsp.on('disconnect', function (socket) {
-        console.log(socket)
-        socket.emit('disconnection', function (room) {
-            // socket.leave(room);
-            // var i = rooms.indexOf(room);
-            // rooms.splice(i, 1);
+            socket.leave(room);
+            var i = rooms.indexOf(room);
+            rooms.splice(i, 1);
         });
     });
 
