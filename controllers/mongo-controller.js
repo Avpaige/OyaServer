@@ -21,7 +21,7 @@ module.exports = {
         db.Volunteer
             .create(volunteer)
             .then(dbVolunteer => {
-                res.json(dbVolunteer.socket)
+                res.json({socket: dbVolunteer.socket})
                 // console.log(dbVolunteer)
             })
             .catch(err => {
@@ -71,10 +71,10 @@ module.exports = {
                 if (volunteers.length > 1) {
                     const volunteermatch = volunteers[0]
                     // sending volunteer room/socket number
-                    res.json(volunteermatch.socket)
+                    res.json({socket: volunteermatch.socket})
                     // console.log(volunteermatch)
                 } else {
-                    res.json(volunteers.socket)
+                    res.json({socket: volunteers.socket})
                 }
             })
             .catch(err => {
