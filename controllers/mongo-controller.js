@@ -138,7 +138,7 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
-                res.send(volunteers)
+                res.json(volunteers)
                 console.log(volunteers)
             })
             .catch(err => {
