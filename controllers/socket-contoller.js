@@ -1,25 +1,3 @@
-// // NON-ROOM WORKING CODE (SIMPLE VERSION)
-// module.exports = server => {
-//     const io = require('socket.io')(server);
-//     const nsp = io.of("/talk")
-//     nsp.on('connection', function (socket) {
-//         console.log('connection');
-
-//         socket.on('chat message', function (msg) {
-//             socket.broadcast.emit('broadcast', msg);
-//         });
-
-//         socket.emit('connected_success')
-
-//     });
-
-//     io.on('connection', function (socket) {
-//         console.log('no namespace connection')
-//     })
-
-
-// }
-
 module.exports = server => {
     const io = require('socket.io')(server);
     const nsp = io.of("/talk")
@@ -28,9 +6,18 @@ module.exports = server => {
     nsp.on('connection', function (socket) {
         socket.emit('connected_success')
 
-        socket.on('room', (room) => {
+        io.on('room', (room) => {
             socket.join(room);
             rooms.push(room);
+            io.to(room).emit('broadcast', "someone has joined");
+
+        });
+
+        io.on('out', (room) => {
+            socket.leave(room);
+            rooms.push(room);
+            io.to(room).emit('broadcast', "someone has left");
+
         });
 
         socket.on('chat message', (data) => {
