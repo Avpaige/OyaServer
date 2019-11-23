@@ -70,7 +70,7 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
-                res.send({socket: volunteers[0].socket})
+                res.json({socket: volunteers[0].socket})
             })
             .catch(err => {
                 res.status(422)
@@ -117,7 +117,7 @@ module.exports = {
                 chatavail: false
             })
             .then(volunteers => {
-                res.send(volunteers)
+                res.json(volunteers)
                 console.log(volunteers)
             })
             .catch(err => {
