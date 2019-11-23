@@ -67,15 +67,7 @@ module.exports = {
                 chatavail: true
             })
             .then(volunteers => {
-                // res.send(volunteers)
-                if (volunteers.length > 1) {
-                    const volunteermatch = volunteers[0]
-                    // sending volunteer room/socket number
-                    res.json({socket: volunteermatch.socket})
-                    // console.log(volunteermatch)
-                } else {
-                    res.json({socket: volunteers.socket})
-                }
+                res.send({socket: volunteers[0].socket})
             })
             .catch(err => {
                 res.status(422)

@@ -41,15 +41,13 @@ const VolunteerSchema = new Schema({
   },
   appavail: {
     type: Boolean,
-    Default: false
+    Default: false,
+    required: true,
   },
   chatavail: {
     type: Boolean,
-    Default: false
-  },
-  room: {
-    type: Boolean,
-    Default: false
+    Default: false,
+    required: true,
   },
   socket: {
     type: String,
