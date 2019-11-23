@@ -6,17 +6,17 @@ module.exports = server => {
     nsp.on('connection', function (socket) {
         socket.emit('connected_success')
 
-        io.on('room', (room) => {
+        socket.on('room', (room) => {
             socket.join(room);
             rooms.push(room);
-            io.to(room).emit('broadcast', "someone has joined");
+            socket.to(room).emit('broadcast', "someone has joined");
 
         });
 
-        io.on('out', (room) => {
+        socket.on('out', (room) => {
             socket.leave(room);
             rooms.push(room);
-            io.to(room).emit('broadcast', "someone has left");
+            socket.to(room).emit('broadcast', "someone has left");
 
         });
 
