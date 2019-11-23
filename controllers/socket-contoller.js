@@ -9,16 +9,16 @@ module.exports = server => {
         socket.on('room', (room) => {
             socket.join(room);
             rooms.push(room);
-            socket.to(room).emit('broadcast', "someone has joined");
+//             socket.to(room).emit('broadcast', "someone has joined");
 
         });
 
-        socket.on('out', (room) => {
-            socket.leave(room);
-            rooms.push(room);
-            socket.to(room).emit('broadcast', "someone has left");
+//         socket.on('out', (room) => {
+//             socket.leave(room);
+//             rooms.push(room);
+//             socket.to(room).emit('broadcast', "someone has left");
 
-        });
+//         });
 
         socket.on('chat message', (data) => {
             const { room, message } = data
