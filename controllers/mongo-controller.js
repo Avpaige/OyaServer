@@ -14,7 +14,10 @@ module.exports = {
             proficiency1: req.body.proficiency1,
             proficiency2: req.body.proficiency2,
             proficiency3: req.body.proficiency3,
-            socket: uuidv4()
+            socket: uuidv4(),
+            appavail: false,
+            chatavail: false
+
         };
 
         // console.log(volunteer)
